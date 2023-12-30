@@ -1,4 +1,8 @@
-gcloud compute instances create sivashankar-dev-web-server \
+set SERVER_NAME=sivashankar-dev-web-server
+set ZONE=us-west1-b
+set STARTUP_SCRIPT_URL=https://raw.githubusercontent.com/sivudu/gcp-webserver-infra/main/infra/000-startup-n-git.sh
+
+gcloud compute instances create %SERVER_NAME% \
     --project=website-376021 \
     --zone=us-west1-b \
     --machine-type=e2-small \
@@ -16,3 +20,5 @@ gcloud compute instances create sivashankar-dev-web-server \
     --shielded-integrity-monitoring \
     --labels=goog-ec-src=vm_add-gcloud \
     --reservation-affinity=any
+    --metadata-from-file=startup-script=%STARTUP_SCRIPT_URL%
+
